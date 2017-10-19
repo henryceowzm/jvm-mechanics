@@ -3,7 +3,7 @@
 其久未更新的个人牌匾上也明确地写着：
 
 >1.	能心算简单JAVA字节码到源代码
-```
+```java
   public static int tiny();
     Code:
        0: iconst_2
@@ -28,27 +28,29 @@ GOOGLE感其诚，口授**JMH（Java Microbenchmark Harness）**真诀。
 
 ### Get source code
 
-```
+```bash
 git clone https://github.com/henryceowzm/jvm-mechanics.git
 ```
 
 ### Compile
-```
+```bash
 cd jvm-mechanics
 mkdir -p bin
 javac -cp ./lib/*:$CLASSPATH -d bin $(find ./src -name "*.java")
 ```
 
 ### Generate scripts
-```
+```bash
 java -cp ./bin:$CLASSPATH support.GenSh
 ```
 
-> **javac -cp ./lib/*:$CLASSPATH -d bin $(find ./src -name "*.java") && java -cp ./bin:$CLASSPATH support.GenSh**
-> **grep 'highlight' -r src/ -l**
+```bash
+javac -cp ./lib/*:$CLASSPATH -d bin $(find ./src -name "*.java") && java -cp ./bin:$CLASSPATH support.GenSh
+grep 'highlight' -r src/ -l
+```
 
 ## Getting start
-```
+```bash
 cd scripts
 sh example12.sh
 javap -cp ./bin:$CLASSPATH -c -p example12.Tiny | ack --color --passthru "tiny"
@@ -57,12 +59,12 @@ javap -cp ./bin:$CLASSPATH -c -p example12.Tiny | ack --color --passthru "tiny"
 ## Warmup
 
 ### Inline
-```
+```bash
 java -XX:+PrintFlagsFinal 2>&1 | grep -i inlin
 sh example14a.sh
 javap -cp ./bin:$CLASSPATH -c -p example14a.MethodSmallEnoughForInline | ack --color --passthru "shouldInline"
 ```
-```
+```bash
 cd /home/henry/practice/jitwatch
 ./launchUI.sh > /dev/null 2>&1 &
 ```
@@ -79,7 +81,7 @@ ___
 ![](images/jitwatch-inline-demo-3.png)
 
 ### Invocation counter
-```
+```bash
 java -XX:+PrintFlagsFinal 2>&1 | grep -i threshold
 sh example02.sh
 ```
@@ -97,7 +99,7 @@ ___
 ![](images/tiered_cimpilation.PNG)
 
 ### BackEdge counter
-```
+```bash
 java -XX:+PrintFlagsFinal 2>&1 | grep -i threshold
 sh example03.sh
 sh example04.sh
@@ -115,7 +117,7 @@ ___
 ### Implicit null check
 **Naive demo of segv signal handler in c**
 ___
-```
+```bash
 gcc segv_signal_handler.c -o segv_signal_handler
 ./segv_signal_handler &
 ```
@@ -137,7 +139,7 @@ ___
 ## Pitfalls
 
 ### DCE
-```
+```bash
 sh example12.sh
 cd /home/henry/practice/jmh-test
 mvn clean install
@@ -149,7 +151,7 @@ java -jar target/benchmarks.jar -i 5 -wi 5 -f 2 "org.sample.JMHSample_08_DeadCod
 ## JMH
 
 ### Install
-```
+```java
 mvn archetype:generate \
           -DinteractiveMode=false \
           -DarchetypeGroupId=org.openjdk.jmh \
@@ -159,7 +161,7 @@ mvn archetype:generate \
           -Dversion=1.0
 ```
 ### Build
-```
+```bash
 cd jmh-test/
 mvn clean install
 ```
