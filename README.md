@@ -10,11 +10,10 @@
        1: ireturn
 ```
 >2. 能娴熟使用mat/visualvm/jconsole排查性能问题
-
 >3. 喜欢阅读并试着鼓捣过开源项目的Demo
 
 但是小A心里清楚，自己的“外功”虽然扎实，但内力修为不够：
-虽然耳闻过**JMM, JLS,GC,JIT**的大名，偶尔也从其他高人处窥得一招半式，但要融会贯通，却是万万不能够。
+虽然耳闻过**JMM,JLS,GC,JIT**的大名，偶尔也从其他高人处窥得一招半式，但要融会贯通，却是万万不能够。
 
 时值GOOGLE集纵家之所长，JAVA，C++，Python均不在话下，武功独步天下。面对这样那样的困惑，小A毅然决定拜师GOOGLE名下。
 GOOGLE感其诚，口授**JMH（Java Microbenchmark Harness）**真诀。
