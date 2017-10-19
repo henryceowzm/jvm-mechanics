@@ -136,7 +136,7 @@ public class GenSh {
       }
       postprocessors.append("\"");
     } else if ( outputAnno.less() ) {
-      postprocessors.append(" | less");
+      postprocessors.append(" less");
     }
     
     return postprocessors.toString();

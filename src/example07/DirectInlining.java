@@ -12,7 +12,7 @@ import support.RunWith;
 @Output(highlight={
   // highlights for PrintCompilation / PrintInlining
   "DirectInlining::square", 
-  "PrintStram::println",
+  "PrintStream::println",
   
   // highlights for assembly
   "invokevirtual println", "0x31", "0x51"
