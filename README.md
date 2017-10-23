@@ -128,7 +128,29 @@ ___
 ___
 ![](images/NullCheck-2.png)
 
->**Essentially a SEGV signal handler.**
+> **Essentially a SEGV signal handler.**
+
+**Object header layout**
+___
+![](images/object-header.png)
+___
+![](images/object-header-mark.png)
+___
+![](images/object-header-klass.png)
+___
+![](images/object-header-instance-data.png)
+___
+![](images/object-header-padding.png)
+___
+![](images/object-header-integer.png)
+```bash
+cd /home/henry/practice/jol
+java -jar jol-cli/target/jol-cli.jar internals java.lang.Object
+```
+___
+![](images/object-header-object.png)
+
+> This explains why offset 0x8 is used.
 
 ### Escape analysis
 **No Integer object is allocated as result of Escape analysis**
