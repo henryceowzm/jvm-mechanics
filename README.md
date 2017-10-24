@@ -119,7 +119,10 @@ ___
 ```bash
 gcc segv_signal_handler.c -o segv_signal_handler
 ./segv_signal_handler &
+strace -f -o output ./segv_signal_handler
+grep 'SIG' output
 ```
+
 **Speculate right executes fast path**
 ___
 ![](images/NullCheck-1.png)
@@ -127,6 +130,12 @@ ___
 **Speculate wrong executes slow path**
 ___
 ![](images/NullCheck-2.png)
+
+```bash
+sh example13.sh
+strace -f -o output java -Xbatch -XX:-TieredCompilation -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:CompileCommand=print,example13/NullCheck::bench -cp ../bin example13.NullCheck 2>&1  |  ack --color --passthru "Nu
+llCheck::bench|made not entrant"
+```
 
 > **Essentially a SEGV signal handler.**
 
@@ -150,7 +159,7 @@ java -jar jol-cli/target/jol-cli.jar internals java.lang.Object
 ___
 ![](images/object-header-object.png)
 
-> This explains why offset 0x8 is used.
+> **This explains why offset 0x8 is used.**
 
 ### Escape analysis
 **No Integer object is allocated as result of Escape analysis**
