@@ -79,6 +79,8 @@ ___
 ___
 ![](images/jitwatch-inline-demo-3.png)
 
+[An example of netty performance improvement by making method inline](http://normanmaurer.me/blog/2014/05/15/Inline-all-the-Things/)
+
 ### Invocation counter
 ```bash
 java -XX:+PrintFlagsFinal 2>&1 | grep -i threshold
@@ -177,6 +179,13 @@ java -jar target/benchmarks.jar -h
 java -jar target/benchmarks.jar -l
 java -jar target/benchmarks.jar -i 5 -wi 5 -f 2 "org.sample.JMHSample_08_DeadCode.*"
 ```
+___
+![](images/DCE-1.png)
+> **Method tiny is compiled. Parameter i is on register rsi. Move parameter to eax, then increment eax.** 
+
+___
+![](images/DCE-2.png)
+> **Method tiny is first inlined to main. 0x4e20 is 20_000, which can be verified by `printf "%d\n" 0x4e20`. Also we can see that the tiny method call is eventually optimized out.**
 
 ## JMH
 
