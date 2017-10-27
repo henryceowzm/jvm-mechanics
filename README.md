@@ -178,14 +178,29 @@ mvn clean install
 java -jar target/benchmarks.jar -h
 java -jar target/benchmarks.jar -l
 java -jar target/benchmarks.jar -i 5 -wi 5 -f 2 "org.sample.JMHSample_08_DeadCode.*"
+javap -c -p -v ./target/classes/org/sample/JMHSample_08_DeadCode.class
+java -XX:-TieredCompilation -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:CompileCommand=print,*.baseline -XX:CompileCommand=print,*.measureWrong -XX:CompileCommand=print,*.measureRight -jar target/benchmarks.jar -i 5 -wi 5 -f 1 "org.sample.JMHSample_08_DeadCode.*" > dce.as
 ```
 ___
 ![](images/DCE-1.png)
-> **Method tiny is compiled. Parameter i is on register rsi. Move parameter to eax, then increment eax.** 
+> **Method tiny is compiled. Parameter i is on register rsi. Move parameter to eax, then increment eax.**
 
 ___
 ![](images/DCE-2.png)
 > **Method tiny is first inlined to main. 0x4e20 is 20_000, which can be verified by `printf "%d\n" 0x4e20`. Also we can see that the tiny method call is eventually optimized out.**
+
+___
+![](images/DCE-bytecode.png)
+___
+![](images/DCE-baseline.png)
+___
+![](images/DCE-measureWrong.png)
+___
+![](images/DCE-measureRight.png)
+___
+![](images/DCE-result.png)
+
+> **It's impossible that baseline and measureWrong could finish nearly within the same time. The fact is that the entire computation in measureWrong is optimized out.**
 
 ## JMH
 
